@@ -1,0 +1,1663 @@
+# 17-maktab
+17-maktab veb-sayti
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>17-MAKTAB | Rasmiy sayt</title>
+
+<style>
+:root {
+    --blue: #2563eb;
+    --purple: #7c3aed;
+    --bg: #f3f6ff;
+    --white: #ffffff;
+    --text: #24324a;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --green: #16a34a;
+    --red: #dc2626;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+button, input, select, textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    padding: 11px 15px;
+    background: var(--blue);
+    color: white;
+    transition: .2s;
+}
+
+button:hover {
+    filter: brightness(.94);
+    transform: translateY(-1px);
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: white;
+    outline: none;
+    color: var(--text);
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--blue);
+}
+
+label {
+    display: block;
+    margin: 12px 0 6px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* LOGIN */
+
+#loginPage {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: linear-gradient(135deg, #2563eb, #7c3aed, #06b6d4);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 390px;
+    padding: 28px;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px #10182835;
+}
+
+.logo {
+    width: 86px;
+    height: 86px;
+    margin: 0 auto 15px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #dbeafe, #ede9fe);
+    font-size: 45px;
+}
+
+.login-card h1 {
+    text-align: center;
+    color: var(--blue);
+    font-size: 27px;
+    margin-bottom: 8px;
+}
+
+.login-subtitle {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.login-card form button,
+.guest-button {
+    width: 100%;
+    margin-top: 14px;
+}
+
+.guest-button {
+    background: #eff6ff;
+    color: var(--blue);
+}
+
+#loginMessage {
+    color: var(--red);
+    text-align: center;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+/* HEADER */
+
+header {
+    background: linear-gradient(110deg, #2563eb, #7c3aed);
+    color: white;
+    padding: 18px;
+}
+
+.header-inner {
+    max-width: 1250px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    font-size: 40px;
+}
+
+.brand h1 {
+    font-size: 23px;
+}
+
+.brand p {
+    margin-top: 5px;
+    font-size: 13px;
+    opacity: .9;
+}
+
+.header-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.header-actions button {
+    background: #ffffff25;
+    border: 1px solid #ffffff70;
+}
+
+/* LAYOUT */
+
+.layout {
+    max-width: 1250px;
+    margin: 20px auto;
+    padding: 0 15px;
+    display: grid;
+    grid-template-columns: 235px minmax(0, 1fr);
+    gap: 20px;
+}
+
+.sidebar {
+    background: white;
+    padding: 14px;
+    border-radius: 18px;
+    height: fit-content;
+    box-shadow: 0 5px 20px #1e3a8a0b;
+}
+
+.sidebar h3 {
+    color: var(--blue);
+    padding: 8px;
+    margin-bottom: 8px;
+}
+
+.nav-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 5px;
+    background: white;
+    color: #344054;
+}
+
+.nav-btn.active,
+.nav-btn:hover {
+    background: #eff6ff;
+    color: var(--blue);
+}
+
+main {
+    min-width: 0;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.page-title {
+    margin-bottom: 18px;
+}
+
+.page-title h2 {
+    font-size: 25px;
+    margin-bottom: 7px;
+}
+
+.page-title p {
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.hero {
+    background: linear-gradient(120deg, #2563eb, #7c3aed);
+    border-radius: 20px;
+    color: white;
+    padding: 30px;
+    margin-bottom: 18px;
+}
+
+.hero h2 {
+    font-size: 29px;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    line-height: 1.8;
+    max-width: 680px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.stat-card, .card {
+    background: white;
+    padding: 18px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px #1e3a8a09;
+    min-width: 0;
+}
+
+.stat-card .emoji {
+    font-size: 29px;
+}
+
+.stat-card strong {
+    display: block;
+    font-size: 25px;
+    margin: 8px 0;
+    color: var(--blue);
+}
+
+.stat-card span {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.card {
+    margin-bottom: 16px;
+}
+
+.card h3 {
+    margin-bottom: 12px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.notice {
+    background: #eff6ff;
+    border-left: 4px solid var(--blue);
+    padding: 14px;
+    border-radius: 9px;
+    margin: 10px 0;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.secondary {
+    background: #eaf1ff;
+    color: var(--blue);
+}
+
+.danger {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.green {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.small {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.empty {
+    padding: 18px 0;
+    text-align: center;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.table-wrap {
+    overflow-x: auto;
+    width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background: white;
+}
+
+th, td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+th {
+    background: #eff6ff;
+    color: var(--blue);
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 9px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.item-card {
+    background: white;
+    padding: 17px;
+    border-radius: 14px;
+    margin-bottom: 13px;
+    box-shadow: 0 4px 15px #1e3a8a0b;
+    overflow-wrap: anywhere;
+}
+
+.item-card h3 {
+    margin-bottom: 9px;
+}
+
+.item-card p {
+    line-height: 1.7;
+    margin-top: 7px;
+}
+
+.classes-grid, .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.class-card {
+    background: white;
+    padding: 20px 10px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px #1e3a8a0b;
+}
+
+.class-card .emoji {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.class-card h3 {
+    margin-bottom: 10px;
+}
+
+.class-card button {
+    margin-top: 10px;
+    padding: 9px;
+    font-size: 13px;
+}
+
+.gallery-item {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px #1e3a8a0b;
+}
+
+.gallery-item img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-caption {
+    padding: 12px;
+    overflow-wrap: anywhere;
+}
+
+.gallery-placeholder {
+    min-height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #dbeafe, #ede9fe);
+    font-size: 42px;
+}
+
+footer {
+    background: #172b4d;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    line-height: 1.9;
+    margin-top: 25px;
+}
+
+footer .small {
+    color: #dbeafe;
+}
+
+#toast {
+    position: fixed;
+    z-index: 999;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: 92%;
+    padding: 13px 18px;
+    border-radius: 12px;
+    color: white;
+    background: #172b4d;
+    box-shadow: 0 5px 20px #0002;
+    display: none;
+}
+
+@media(max-width: 900px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 5px;
+    }
+
+    .sidebar h3 {
+        grid-column: 1 / -1;
+    }
+
+    .nav-btn {
+        margin: 0;
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media(max-width: 550px) {
+    .brand h1 {
+        font-size: 19px;
+    }
+
+    .brand-icon {
+        font-size: 32px;
+    }
+
+    .hero {
+        padding: 22px;
+    }
+
+    .hero h2 {
+        font-size: 24px;
+    }
+
+    .grid, .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .classes-grid, .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .page-title h2 {
+        font-size: 22px;
+    }
+
+    .stat-card, .card {
+        padding: 14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<section id="loginPage">
+    <div class="login-card">
+        <div class="logo">🏫</div>
+        <h1>17-MAKTAB</h1>
+        <p class="login-subtitle">✨ Maktab axborot portaliga xush kelibsiz!</p>
+
+        <form id="loginForm">
+            <label for="username">👤 Login</label>
+            <input id="username" autocomplete="username"
+                   placeholder="Loginni kiriting" required>
+
+            <label for="password">🔑 Parol</label>
+            <input id="password" type="password"
+                   autocomplete="current-password"
+                   placeholder="Parolni kiriting" required>
+
+            <button type="submit">🚀 Saytga kirish</button>
+        </form>
+
+        <button type="button" class="guest-button" id="guestButton">
+            👀 Mehmon sifatida kirish
+        </button>
+
+        <p id="loginMessage" role="alert"></p>
+    </div>
+</section>
+
+<!-- ASOSIY SAYT -->
+<div id="app" class="hidden">
+
+<header>
+    <div class="header-inner">
+        <div class="brand">
+            <div class="brand-icon">🏫</div>
+            <div>
+                <h1>17-MAKTAB</h1>
+                <p>📚 Bilim — kelajak poydevori!</p>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <button type="button" id="roleLabel">👤 Mehmon</button>
+            <button type="button" id="logoutButton">🚪 Chiqish</button>
+        </div>
+    </div>
+</header>
+
+<div class="layout">
+
+<aside class="sidebar">
+    <h3>📌 ASOSIY MENYU</h3>
+    <button class="nav-btn active" data-page="home">🏠 Bosh sahifa</button>
+    <button class="nav-btn" data-page="about">🏫 Maktab haqida</button>
+    <button class="nav-btn" data-page="students">👨‍🎓 O‘quvchilar</button>
+    <button class="nav-btn" data-page="classes">📚 Sinflar</button>
+    <button class="nav-btn" data-page="teachers">👩‍🏫 O‘qituvchilar</button>
+    <button class="nav-btn" data-page="schedule">🗓️ Dars jadvali</button>
+    <button class="nav-btn" data-page="events">🎉 Tadbirlar</button>
+    <button class="nav-btn" data-page="news">📰 Yangiliklar</button>
+    <button class="nav-btn" data-page="gallery">🖼️ Galereya</button>
+    <button class="nav-btn" data-page="siteinfo">ℹ️ Sayt ma’lumoti</button>
+    <button class="nav-btn admin-only hidden" data-page="admin">⚙️ Adminstrator panel</button>
+</aside>
+
+<main>
+
+<!-- BOSH SAHIFA -->
+<section class="page active" id="page-home">
+    <div class="hero">
+        <h2>🌟 17-maktab saytiga xush kelibsiz!</h2>
+        <p>
+            Maktabimiz haqidagi ma’lumotlar, o‘quvchilar, ustozlar,
+            dars jadvali, tadbirlar va yangiliklar bilan tanishing.
+            Birgalikda bilim sari! 🎓
+        </p>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card">
+            <div class="emoji">👨‍🎓</div>
+            <strong id="studentCount">0</strong>
+            <span>O‘quvchilar</span>
+        </div>
+        <div class="stat-card">
+            <div class="emoji">👩‍🏫</div>
+            <strong id="teacherCount">0</strong>
+            <span>O‘qituvchilar</span>
+        </div>
+        <div class="stat-card">
+            <div class="emoji">📚</div>
+            <strong>11</strong>
+            <span>Sinflar</span>
+        </div>
+        <div class="stat-card">
+            <div class="emoji">🎉</div>
+            <strong id="eventCount">0</strong>
+            <span>Tadbirlar</span>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h3>📰 So‘nggi yangiliklar</h3>
+            <div id="homeNews"></div>
+        </div>
+        <div class="card">
+            <h3>🎉 Tadbirlar</h3>
+            <div id="homeEvents"></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>💙 Bizning shiorimiz</h3>
+        <div class="notice">
+            ✨ Ilm olish — yuksalish sari eng ishonchli yo‘l!
+        </div>
+    </div>
+</section>
+
+<!-- MAKTAB HAQIDA -->
+<section class="page" id="page-about">
+    <div class="page-title">
+        <h2>🏫 Maktab haqida</h2>
+        <p>17-maktab faoliyati va ma’lumotlari</p>
+    </div>
+
+    <div class="card">
+        <h3>📖 Biz haqimizda</h3>
+        <p id="aboutText" style="line-height:1.9">
+            Maktab haqidagi ma’lumotlar admin tomonidan kiritiladi.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🎯 Maqsadimiz</h3>
+        <p style="line-height:1.8">
+            Bilimli, odobli va zamonaviy fikrlaydigan yoshlarni tarbiyalash.
+        </p>
+    </div>
+</section>
+
+<!-- O‘QUVCHILAR -->
+<section class="page" id="page-students">
+    <div class="page-title">
+        <h2>👨‍🎓 O‘quvchilar</h2>
+        <p>O‘quvchilar ro‘yxati</p>
+    </div>
+
+    <div class="card">
+        <div class="form-row">
+            <div>
+                <label for="studentSearch">🔎 O‘quvchini qidirish</label>
+                <input id="studentSearch" placeholder="Ism yoki familiya...">
+            </div>
+            <div>
+                <label for="studentClassFilter">📚 Sinfni tanlash</label>
+                <select id="studentClassFilter">
+                    <option value="">Barcha sinflar</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr><th>№</th><th>F.I.Sh.</th><th>Sinf</th><th>Jinsi</th></tr>
+                </thead>
+                <tbody id="studentsTable"></tbody>
+            </table>
+        </div>
+        <p id="studentsEmpty" class="empty">👨‍🎓 Hozircha o‘quvchilar qo‘shilmagan.</p>
+    </div>
+</section>
+
+<!-- SINFLAR -->
+<section class="page" id="page-classes">
+    <div class="page-title">
+        <h2>📚 Sinflar</h2>
+        <p>Kerakli sinfni tanlab, o‘quvchilarini ko‘ring.</p>
+    </div>
+    <div id="classesGrid" class="classes-grid"></div>
+</section>
+
+<!-- O‘QITUVCHILAR -->
+<section class="page" id="page-teachers">
+    <div class="page-title">
+        <h2>👩‍🏫 O‘qituvchilar</h2>
+        <p>Maktab pedagoglari ro‘yxati</p>
+    </div>
+
+    <div class="card">
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr><th>№</th><th>F.I.Sh.</th><th>Fan</th><th>Ma’lumot</th></tr>
+                </thead>
+                <tbody id="teachersTable"></tbody>
+            </table>
+        </div>
+        <p id="teachersEmpty" class="empty">👩‍🏫 Hozircha o‘qituvchilar qo‘shilmagan.</p>
+    </div>
+</section>
+
+<!-- DARS JADVALI -->
+<section class="page" id="page-schedule">
+    <div class="page-title">
+        <h2>🗓️ Dars jadvali</h2>
+        <p>Sinfni tanlang va dars jadvalini ko‘ring.</p>
+    </div>
+
+    <div class="card">
+        <label for="scheduleClass">📚 Sinf</label>
+        <select id="scheduleClass"></select>
+    </div>
+
+    <div class="card">
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr><th>Hafta kuni</th><th>1-dars</th><th>2-dars</th><th>3-dars</th><th>4-dars</th><th>5-dars</th></tr>
+                </thead>
+                <tbody id="scheduleTable"></tbody>
+            </table>
+        </div>
+        <p class="empty" id="scheduleEmpty">
+            🗓️ Jadvalga darslarni admin panelidan qo‘shish mumkin.
+        </p>
+    </div>
+</section>
+
+<!-- TADBIRLAR -->
+<section class="page" id="page-events">
+    <div class="page-title">
+        <h2>🎉 Tadbirlar va bayramlar</h2>
+        <p>Maktab tadbirlari haqida ma’lumotlar</p>
+    </div>
+    <div id="eventsList"></div>
+</section>
+
+<!-- YANGILIKLAR -->
+<section class="page" id="page-news">
+    <div class="page-title">
+        <h2>📰 Yangiliklar</h2>
+        <p>Maktab hayotidan yangiliklar</p>
+    </div>
+    <div id="newsList"></div>
+</section>
+
+<!-- GALEREYA -->
+<section class="page" id="page-gallery">
+    <div class="page-title">
+        <h2>🖼️ Galereya</h2>
+        <p>Maktab rasmlari va tadbirlardan lavhalar</p>
+    </div>
+    <div id="galleryGrid" class="gallery-grid"></div>
+    <p id="galleryEmpty" class="empty">
+        🖼️ Hozircha rasmlar yo‘q. Admin panelidan rasm qo‘shishingiz mumkin.
+    </p>
+</section>
+
+<!-- SAYT MA’LUMOTI -->
+<section class="page" id="page-siteinfo">
+    <div class="page-title">
+        <h2>ℹ️ Sayt ma’lumoti</h2>
+        <p>Sayt yaratuvchisi va aloqa ma’lumotlari</p>
+    </div>
+
+    <div class="card">
+        <h3>👨‍💻 Sayt yaratuvchisi</h3>
+        <div class="notice">
+            <strong>Ism:</strong>
+            <span id="infoCreator">Diyorbek Turdiboyev</span>
+        </div>
+        <div class="notice">
+            <strong>📞 Telefon raqamlari:</strong><br>
+            <a id="phoneLink1" href="tel:+998945760390">+998 94 576 03 90</a><br>
+            <a id="phoneLink2" href="tel:+998943978320">+998 94 397 83 20</a>
+        </div>
+        <div class="notice">
+            <strong>📍 Manzil:</strong>
+            <p id="infoAddress">Keshkovut qishlog‘i, Chordala mahallasi, 14-uy</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>🏫 Maktab haqida</h3>
+        <p id="infoDescription" style="line-height:1.8">
+            17-maktabning axborot sayti.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>🔒 Sayt xavfsizligi</h3>
+        <p class="small">
+            Admin paneli demo darajasidagi login bilan himoyalangan.
+            Bu parol haqiqiy server autentifikatsiyasi emas.
+            Muhim ma’lumotlarni himoyalash uchun server tomonidagi login tizimi zarur.
+        </p>
+    </div>
+</section>
+
+<!-- ADMIN PANEL -->
+<section class="page" id="page-admin">
+    <div class="page-title">
+        <h2>⚙️ Admin panel</h2>
+        <p>Saytning barcha bo‘limlarini shu yerdan boshqaring.</p>
+    </div>
+
+    <!-- SAYT HAQIDA -->
+    <div class="card">
+        <h3>ℹ️ Sayt ma’lumotlarini tahrirlash</h3>
+        <form id="siteInfoForm">
+            <label for="creatorInput">👨‍💻 Yaratuvchi ismi</label>
+            <input id="creatorInput" required>
+
+            <div class="form-row">
+                <div>
+                    <label for="phone1Input">📞 Birinchi telefon</label>
+                    <input id="phone1Input" type="tel" required>
+                </div>
+                <div>
+                    <label for="phone2Input">📞 Ikkinchi telefon</label>
+                    <input id="phone2Input" type="tel" required>
+                </div>
+            </div>
+
+            <label for="addressInput">📍 Manzil</label>
+            <input id="addressInput" required>
+
+            <label for="descriptionInput">🏫 Maktab haqida</label>
+            <textarea id="descriptionInput" rows="4" required></textarea>
+
+            <div class="form-actions">
+                <button type="submit">💾 Ma’lumotlarni saqlash</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- O‘QUVCHI -->
+    <div class="card">
+        <h3>➕ O‘quvchi qo‘shish</h3>
+        <form id="studentForm">
+            <label for="newStudentName">O‘quvchi F.I.Sh.</label>
+            <input id="newStudentName" required placeholder="Ism va familiya">
+
+            <div class="form-row">
+                <div>
+                    <label for="newStudentClass">Sinf</label>
+                    <select id="newStudentClass" required></select>
+                </div>
+                <div>
+                    <label for="newStudentGender">Jinsi</label>
+                    <select id="newStudentGender">
+                        <option>O‘g‘il bola</option>
+                        <option>Qiz bola</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" style="margin-top:14px">➕ O‘quvchini qo‘shish</button>
+        </form>
+    </div>
+
+    <!-- O‘QITUVCHI -->
+    <div class="card">
+        <h3>➕ O‘qituvchi qo‘shish</h3>
+        <form id="teacherForm">
+            <label for="newTeacherName">O‘qituvchi F.I.Sh.</label>
+            <input id="newTeacherName" required placeholder="Ism va familiya">
+
+            <label for="newTeacherSubject">Fani</label>
+            <input id="newTeacherSubject" required placeholder="Masalan: Matematika">
+
+            <label for="newTeacherInfo">Qo‘shimcha ma’lumot</label>
+            <input id="newTeacherInfo" placeholder="Masalan: Fan o‘qituvchisi">
+
+            <button type="submit" style="margin-top:14px">➕ O‘qituvchini qo‘shish</button>
+        </form>
+    </div>
+
+    <!-- YANGILIK -->
+    <div class="card">
+        <h3>📰 Yangilik qo‘shish</h3>
+        <form id="newsForm">
+            <label for="newNewsTitle">Sarlavha</label>
+            <input id="newNewsTitle" required placeholder="Yangilik sarlavhasi">
+
+            <label for="newNewsText">Yangilik matni</label>
+            <textarea id="newNewsText" rows="4" required placeholder="Yangilik haqida yozing"></textarea>
+
+            <button type="submit" style="margin-top:14px">📰 Yangilikni e’lon qilish</button>
+        </form>
+    </div>
+
+    <!-- TADBIR -->
+    <div class="card">
+        <h3>🎉 Tadbir qo‘shish</h3>
+        <form id="eventForm">
+            <label for="newEventTitle">Tadbir nomi</label>
+            <input id="newEventTitle" required placeholder="Bayram yoki tadbir nomi">
+
+            <div class="form-row">
+                <div>
+                    <label for="newEventDate">Sana</label>
+                    <input id="newEventDate" type="date" required>
+                </div>
+                <div>
+                    <label for="newEventPlace">Joy</label>
+                    <input id="newEventPlace" placeholder="Tadbir joyi">
+                </div>
+            </div>
+
+            <label for="newEventInfo">Tadbir haqida</label>
+            <textarea id="newEventInfo" rows="3" placeholder="Qo‘shimcha ma’lumot"></textarea>
+
+            <button type="submit" style="margin-top:14px">🎉 Tadbirni qo‘shish</button>
+        </form>
+    </div>
+
+    <!-- DARS JADVALI -->
+    <div class="card">
+        <h3>🗓️ Dars jadvalini kiritish yoki almashtirish</h3>
+        <form id="scheduleForm">
+            <div class="form-row">
+                <div>
+                    <label for="editScheduleClass">Sinf</label>
+                    <select id="editScheduleClass" required></select>
+                </div>
+                <div>
+                    <label for="editScheduleDay">Hafta kuni</label>
+                    <select id="editScheduleDay" required>
+                        <option>Dushanba</option>
+                        <option>Seshanba</option>
+                        <option>Chorshanba</option>
+                        <option>Payshanba</option>
+                        <option>Juma</option>
+                        <option>Shanba</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div><label for="lesson1">1-dars</label><input id="lesson1" required></div>
+                <div><label for="lesson2">2-dars</label><input id="lesson2" required></div>
+                <div><label for="lesson3">3-dars</label><input id="lesson3" required></div>
+                <div><label for="lesson4">4-dars</label><input id="lesson4" required></div>
+                <div><label for="lesson5">5-dars</label><input id="lesson5" required></div>
+            </div>
+
+            <button type="submit" style="margin-top:14px">💾 Jadvalni saqlash</button>
+        </form>
+    </div>
+
+    <!-- GALEREYA -->
+    <div class="card">
+        <h3>🖼️ Galereyaga rasm qo‘shish</h3>
+        <form id="galleryForm">
+            <label for="galleryCaption">Rasm nomi</label>
+            <input id="galleryCaption" required placeholder="Masalan: Maktab tadbiri">
+
+            <label for="galleryFile">📷 Rasmni tanlash</label>
+            <input id="galleryFile" type="file" accept="image/*" required>
+
+            <p class="small">
+                Rasm brauzer xotirasida saqlanadi. Katta rasmlar xotirani tez to‘ldirishi mumkin.
+            </p>
+
+            <button type="submit" style="margin-top:14px">🖼️ Rasmni qo‘shish</button>
+        </form>
+    </div>
+
+    <!-- RO‘YXATLARNI BOSHQARISH -->
+    <div class="card">
+        <h3>🗑️ Qo‘shilgan ma’lumotlarni o‘chirish</h3>
+        <p class="small">
+            Har bir ro‘yxatdagi element yonidagi o‘chirish tugmasidan foydalaning.
+        </p>
+
+        <h4 style="margin-top:16px">👨‍🎓 O‘quvchilar</h4>
+        <div id="manageStudents"></div>
+
+        <h4 style="margin-top:16px">👩‍🏫 O‘qituvchilar</h4>
+        <div id="manageTeachers"></div>
+
+        <h4 style="margin-top:16px">📰 Yangiliklar</h4>
+        <div id="manageNews"></div>
+
+        <h4 style="margin-top:16px">🎉 Tadbirlar</h4>
+        <div id="manageEvents"></div>
+
+        <h4 style="margin-top:16px">🖼️ Galereya</h4>
+        <div id="manageGallery"></div>
+    </div>
+</section>
+
+</main>
+</div>
+
+<footer>
+    <strong>🏫 17-MAKTAB</strong><br>
+    ✨ Bilim — kelajak poydevori!<br>
+    <span class="small">Sayt yaratuvchisi: Diyorbek Turdiboyev</span><br>
+    <span class="small">© <span id="currentYear"></span> • Barcha huquqlar himoyalangan</span>
+</footer>
+
+</div>
+
+<div id="toast" role="status"></div>
+
+<script>
+"use strict";
+
+/* SOZLAMALAR VA BOSHLANG‘ICH HOLAT */
+
+const ADMIN_LOGIN = "Maktab";
+const ADMIN_PASSWORD = "17";
+
+const CLASSES = Array.from({length: 11}, (_, i) => (i + 1) + "-sinf");
+const DAYS = [
+    "Dushanba", "Seshanba", "Chorshanba",
+    "Payshanba", "Juma", "Shanba"
+];
+
+const DEFAULT_INFO = {
+    creator: "Diyorbek Turdiboyev",
+    phone1: "+998945760390",
+    phone2: "+998943978320",
+    address: "Keshkovut qishlog‘i, Chordala mahallasi, 14-uy",
+    description: "17-maktabning axborot sayti. Maktab haqidagi batafsil ma’lumotlar admin paneli orqali kiritiladi."
+};
+
+const EMPTY_DATA = {
+    students: [],
+    teachers: [],
+    news: [],
+    events: [],
+    gallery: [],
+    schedules: {},
+    info: DEFAULT_INFO
+};
+
+let data = loadData();
+let currentRole = "guest";
+
+const $ = id => document.getElementById(id);
+
+function loadData() {
+    try {
+        const raw = localStorage.getItem("maktab17_site_data");
+
+        if (raw) {
+            const saved = JSON.parse(raw);
+
+            return {
+                students: Array.isArray(saved.students) ? saved.students : [],
+                teachers: Array.isArray(saved.teachers) ? saved.teachers : [],
+                news: Array.isArray(saved.news) ? saved.news : [],
+                events: Array.isArray(saved.events) ? saved.events : [],
+                gallery: Array.isArray(saved.gallery) ? saved.gallery : [],
+                schedules: saved.schedules && typeof saved.schedules === "object" ? saved.schedules : {},
+                info: {...DEFAULT_INFO, ...(saved.info || {})}
+            };
+        }
+    } catch (error) {
+        console.warn("Saqlangan ma’lumotni o‘qib bo‘lmadi.", error);
+    }
+
+    return JSON.parse(JSON.stringify(EMPTY_DATA));
+}
+
+function saveData() {
+    try {
+        localStorage.setItem("maktab17_site_data", JSON.stringify(data));
+        return true;
+    } catch (error) {
+        notify("Saqlash amalga oshmadi. Xotira to‘lgan bo‘lishi mumkin.");
+        return false;
+    }
+}
+
+function notify(message) {
+    const toast = $("toast");
+    toast.textContent = message;
+    toast.style.display = "block";
+
+    clearTimeout(notify.timer);
+    notify.timer = setTimeout(() => {
+        toast.style.display = "none";
+    }, 3000);
+}
+
+function esc(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[char]);
+}
+
+function fillClasses(select, allOption = false) {
+    if (!select) return;
+
+    let html = allOption ? '<option value="">Barcha sinflar</option>' : "";
+
+    html += CLASSES.map(name =>
+        `<option value="${name}">${name}</option>`
+    ).join("");
+
+    select.innerHTML = html;
+}
+
+fillClasses($("studentClassFilter"), true);
+fillClasses($("scheduleClass"));
+fillClasses($("newStudentClass"));
+fillClasses($("editScheduleClass"));
+
+/* LOGIN */
+
+function enterSite(role) {
+    currentRole = role;
+
+    $("loginPage").classList.add("hidden");
+    $("app").classList.remove("hidden");
+
+    $("roleLabel").textContent = role === "admin" ? "⚙️ Admin" : "👤 Mehmon";
+
+    document.querySelectorAll(".admin-only").forEach(button => {
+        button.classList.toggle("hidden", role !== "admin");
+    });
+
+    renderAll();
+    openPage("home");
+}
+
+$("loginForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    const username = $("username").value.trim();
+    const password = $("password").value;
+
+    if (username === ADMIN_LOGIN && password === ADMIN_PASSWORD) {
+        $("loginMessage").textContent = "";
+        enterSite("admin");
+    } else {
+        $("loginMessage").textContent = "❌ Login yoki parol noto‘g‘ri.";
+        $("password").value = "";
+        $("password").focus();
+    }
+});
+
+$("guestButton").addEventListener("click", () => {
+    $("loginMessage").textContent = "";
+    enterSite("guest");
+});
+
+$("logoutButton").addEventListener("click", () => {
+    currentRole = "guest";
+    $("app").classList.add("hidden");
+    $("loginPage").classList.remove("hidden");
+    $("loginForm").reset();
+    $("loginMessage").textContent = "";
+    window.scrollTo(0, 0);
+});
+
+/* MENYU */
+
+function openPage(name) {
+    if (name === "admin" && currentRole !== "admin") {
+        notify("Admin paneliga faqat admin kira oladi.");
+        return;
+    }
+
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+
+    document.querySelectorAll(".nav-btn").forEach(button => {
+        button.classList.toggle("active", button.dataset.page === name);
+    });
+
+    const page = $("page-" + name);
+    if (page) page.classList.add("active");
+
+    window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+document.querySelectorAll(".nav-btn").forEach(button => {
+    button.addEventListener("click", () => openPage(button.dataset.page));
+});
+
+/* SAYT MA’LUMOTI */
+
+function renderInfo() {
+    $("infoCreator").textContent = data.info.creator;
+    $("infoAddress").textContent = data.info.address;
+    $("infoDescription").textContent = data.info.description;
+    $("aboutText").textContent = data.info.description;
+
+    $("phoneLink1").textContent = data.info.phone1;
+    $("phoneLink1").href = "tel:" + data.info.phone1.replace(/[^\d+]/g, "");
+
+    $("phoneLink2").textContent = data.info.phone2;
+    $("phoneLink2").href = "tel:" + data.info.phone2.replace(/[^\d+]/g, "");
+
+    $("creatorInput").value = data.info.creator;
+    $("phone1Input").value = data.info.phone1;
+    $("phone2Input").value = data.info.phone2;
+    $("addressInput").value = data.info.address;
+    $("descriptionInput").value = data.info.description;
+}
+
+$("siteInfoForm").addEventListener("submit", event => {
+    event.preventDefault();
+    if (currentRole !== "admin") return;
+
+    data.info = {
+        creator: $("creatorInput").value.trim(),
+        phone1: $("phone1Input").value.trim(),
+        phone2: $("phone2Input").value.trim(),
+        address: $("addressInput").value.trim(),
+        description: $("descriptionInput").value.trim()
+    };
+
+    if (saveData()) {
+        renderInfo();
+        notify("✅ Sayt ma’lumotlari saqlandi!");
+    }
+});
+
+/* O‘QUVCHILAR */
+
+function renderStudents() {
+    const query = $("studentSearch").value.trim().toLowerCase();
+    const className = $("studentClassFilter").value;
+
+    const list = data.students.filter(student =>
+        student.name.toLowerCase().includes(query) &&
+        (!className || student.className === className)
+    );
+
+    $("studentsTable").innerHTML = list.map((student, index) => `
+        <tr>
+            <td>${index + 1}</td>
+            <td>${esc(student.name)}</td>
+            <td><span class="badge">${esc(student.className)}</span></td>
+            <td>${esc(student.gender)}</td>
+        </tr>
+    `).join("");
+
+    $("studentsEmpty").classList.toggle("hidden", list.length > 0);
+}
+
+$("studentSearch").addEventListener("input", renderStudents);
+$("studentClassFilter").addEventListener("change", renderStudents);
+
+$("studentForm").addEventListener("submit", event => {
+    event.preventDefault();
+    if (currentRole !== "admin") return;
+
+    data.students.push({
+        name: $("newStudentName").value.trim(),
+        className: $("newStudentClass").value,
+        gender: $("newStudentGender").value
+    });
+
+    if (saveData()) {
+        event.target.reset();
+        renderAll();
+        notify("✅ O‘quvchi qo‘shildi!");
+    }
+});
+
+/* O‘QITUVCHILAR */
+
+function renderTeachers() {
+    $("teachersTable").innerHTML = data.teachers.map((teacher, index) => `
+        <tr>
+            <td>${index + 1}</td>
+            <td>${esc(teacher.name)}</td>
+            <td>${esc(teacher.subject)}</td>
+            <td>${esc(teacher.info || "—")}</td>
+        </tr>
+    `).join("");
+
+    $("teachersEmpty").classList.toggle("hidden", data.teachers.length > 0);
+}
+
+$("teacherForm").addEventListener("submit", event => {
+    event.preventDefault();
+    if (currentRole !== "admin") return;
+
+    data.teachers.push({
+        name: $("newTeacherName").value.trim(),
+        subject: $("newTeacherSubject").value.trim(),
+        info: $("newTeacherInfo").value.trim()
+    });
+
+    if (saveData()) {
+        event.target.reset();
+        renderAll();
+        notify("✅ O‘qituvchi qo‘shildi!");
+    }
+});
+
+/* SINFLAR */
+
+function renderClasses() {
+    $("classesGrid").innerHTML = CLASSES.map(className => {
+        const count = data.students.filter(s => s.className === className).length;
+
+        return `
+            <div class="class-card">
+                <div class="emoji">📚</div>
+                <h3>${className}</h3>
+                <p class="small">${count} nafar o‘quvchi</p>
+                <button type="button" data-class="${className}" class="show-class">
+                    👀 Ko‘rish
+                </button>
+            </div>
+        `;
+    }).join("");
+
+    document.querySelectorAll(".show-class").forEach(button => {
+        button.addEventListener("click", () => {
+            $("studentClassFilter").value = button.dataset.class;
+            $("studentSearch").value = "";
+            renderStudents();
+            openPage("students");
+        });
+    });
+}
+
+/* DARS JADVALI */
+
+function renderSchedule() {
+    const selectedClass = $("scheduleClass").value || CLASSES[0];
+    const entries = DAYS.map(day => ({
+        day,
+        lessons: data.schedules[selectedClass + "|" + day] || []
+    }));
+
+    $("scheduleTable").innerHTML = entries.map(entry => `
+        <tr>
+            <td><strong>${entry.day}</strong></td>
+            ${[0,1,2,3,4].map(i => `<td>${esc(entry.lessons[i] || "—")}</td>`).join("")}
+        </tr>
+    `).join("");
+
+    const hasAny = entries.some(entry => entry.lessons.length > 0);
+    $("scheduleEmpty").classList.toggle("hidden", hasAny);
+}
+
+$("scheduleClass").addEventListener("change", renderSchedule);
+
+$("scheduleForm").addEventListener("submit", event => {
+    event.preventDefault();
+    if (currentRole !== "admin") return;
+
+    const className = $("editScheduleClass").value;
+    const day = $("editScheduleDay").value;
+
+    data.schedules[className + "|" + day] = [
+        $("lesson1").value.trim(),
+        $("lesson2").value.trim(),
+        $("lesson3").value.trim(),
+        $("lesson4").value.trim(),
+        $("lesson5").value.trim()
+    ];
+
+    if (saveData()) {
+        $("scheduleClass").value = className;
+        event.target.reset();
+        renderSchedule();
+        notify("✅ Dars jadvali saqlandi!");
+    }
+});
+
+/* YANGILIKLAR */
+
+function renderNews() {
+    const html = data.news.slice().reverse().map(item => `
+        <article class="item-card">
+            <h3>📰 ${esc(item.title)}</h3>
+            <span class="small">${esc(item.date)}</span>
+            <p>${esc(item.text)}</p>
+        </article>
+    `).join("");
+
+    $("newsList").innerHTML = html || '<p class="empty">📰 Hozircha yangiliklar yo‘q.</p>';
+
+    $("homeNews").innerHTML = data.news.slice().reverse().slice(0, 3).map(item => `
+        <div class="notice">
+            <strong>${esc(item.title)}</strong>
+            <p>${esc(item.text)}</p>
+        </div>
+    `).join("") || '<p class="empty">Yangiliklar hali qo‘shilmagan.</p>';
+}
+
+$("newsForm").addEventListener("submit", event => {
+    event.preventDefault();
+    if (currentRole !== "admin") return;
+
+    data.news.push({
+        title: $("newNewsTitle").value.trim(),
+        text: $("newNewsText").value.trim(),
+        date: new Date().toLocaleDateString("uz-UZ")
+    });
+
+    if (saveData()) {
+        event.target.reset();
+        renderAll();
+        notify("✅ Yangilik e’lon qilindi!");
+    }
+});
+
+/* TADBIRLAR */
+
+function renderEvents() {
+    const html = data.events.slice().reverse().map(item => `
+        <article class="item-card">
+            <h3>🎉 ${esc(item.title)}</h3>
+            <p><strong>📅 Sana:</strong> ${esc(item.date || "Belgilanmagan")}</p>
+            <p><strong>📍 Joy:</strong> ${esc(item.place || "Belgilanmagan")}</p>
+            <p>${esc(item.info || "")}</p>
+        </article>
+    `).join("");
+
+    $("eventsList").innerHTML = html || '<p class="empty">🎉 Hozircha tadbirlar yo‘q.</p>';
+
+    $("homeEvents").innerHTML = data.events.slice().reverse().slice(0, 3).map(item => `
+        <div class="notice">
+            <strong>${esc(item.title)}</strong>
+            <p>📅 ${esc(item.date || "Sana belgilanmagan")}</p>
+        </div>
+    `).join("") || '<p class="empty">Tadbirlar hali qo‘shilmagan.</p>';
+}
+
+$("eventForm").addEventListener("submit", event => {
+    event.preventDefault();
+    if (currentRole !== "admin") return;
+
+    data.events.push({
+        title: $("newEventTitle").value.trim(),
+        date: $("newEventDate").value,
+        place: $("newEventPlace").value.trim(),
+        info: $("newEventInfo").value.trim()
+    });
+
+    if (saveData()) {
+        event.target.reset();
+        renderAll();
+        notify("✅ Tadbir qo‘shildi!");
+    }
+});
+
+/* GALEREYA */
+
+function renderGallery() {
+    $("galleryGrid").innerHTML = data.gallery.map(item => `
+        <div class="gallery-item">
+            <img src="${item.image}" alt="${esc(item.caption)}">
+            <div class="gallery-caption">${esc(item.caption)}</div>
+        </div>
+    `).join("");
+
+    $("galleryEmpty").classList.toggle("hidden", data.gallery.length > 0);
+}
+
+$("galleryForm").addEventListener("submit", event => {
+    event.preventDefault();
+    if (currentRole !== "admin") return;
+
+    const file = $("galleryFile").files[0];
+    const caption = $("galleryCaption").value.trim();
+
+    if (!file || !caption) {
+        notify("Rasm va uning nomini kiriting.");
+        return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+        notify("Faqat rasm faylini tanlang.");
+        return;
+    }
+
+    if (file.size > 1200000) {
+        notify("Rasm juda katta. 1,2 MB dan kichik rasm tanlang.");
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+        data.gallery.push({
+            caption,
+            image: reader.result
+        });
+
+        if (saveData()) {
+            event.target.reset();
+            renderAll();
+            notify("✅ Rasm galereyaga qo‘shildi!");
+        } else {
+            data.gallery.pop();
+            renderAll();
+        }
+    };
+
+    reader.onerror = () => notify("Rasmni o‘qib bo‘lmadi.");
+    reader.readAsDataURL(file);
+});
+
+/* ADMIN PANELIDAGI O‘CHIRISH RO‘YXATLARI */
+
+function renderManageList(containerId, items, type, labelFunction) {
+    const container = $(containerId);
+
+    if (!items.length) {
+        container.innerHTML = '<p class="small">Hozircha ma’lumot yo‘q.</p>';
+        return;
+    }
+
+    container.innerHTML = items.map((item, index) => `
+        <div class="notice" style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <span>${esc(labelFunction(item))}</span>
+            <button type="button" class="danger delete-item"
+                data-type="${type}" data-index="${index}">🗑️ O‘chirish</button>
+        </div>
+    `).join("");
+}
+
+function renderManage() {
+    renderManageList("manageStudents", data.students, "students", x => x.name + " — " + x.className);
+    renderManageList("manageTeachers", data.teachers, "teachers", x => x.name + " — " + x.subject);
+    renderManageList("manageNews", data.news, "news", x => x.title);
+    renderManageList("manageEvents", data.events, "events", x => x.title);
+    renderManageList("manageGallery", data.gallery, "gallery", x => x.caption);
+}
+
+$("page-admin").addEventListener("click", event => {
+    const button = event.target.closest(".delete-item");
+    if (!button || currentRole !== "admin") return;
+
+    const type = button.dataset.type;
+    const index = Number(button.dataset.index);
+
+    if (!Array.isArray(data[type]) || !Number.isInteger(index)) return;
+
+    if (!confirm("Ushbu ma’lumot o‘chirilsinmi?")) return;
+
+    data[type].splice(index, 1);
+
+    if (saveData()) {
+        renderAll();
+        notify("🗑️ Ma’lumot o‘chirildi.");
+    }
+});
+
+/* UMUMIY YANGILASH */
+
+function renderAll() {
+    renderInfo();
+    renderStudents();
+    renderTeachers();
+    renderClasses();
+    renderSchedule();
+    renderNews();
+    renderEvents();
+    renderGallery();
+    renderManage();
+
+    $("studentCount").textContent = data.students.length;
+    $("teacherCount").textContent = data.teachers.length;
+    $("eventCount").textContent = data.events.length;
+}
+
+$("currentYear").textContent = new Date().getFullYear();
+
+/* SAYTNING BOSHLANG‘ICH HOLATI */
+$("app").classList.add("hidden");
+$("loginPage").classList.remove("hidden");
+renderAll();
+</script>
+
+</body>
+  </html>
